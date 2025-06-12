@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Mooksin 💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Sriracha', cursive;
+      background: linear-gradient(135deg, #ffd6e0, #ffe8cc);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      color: #ff4f81;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff4f81, 0 0 30px #ff0066;
+      }
+      to {
+        text-shadow: 0 0 20px #ffe6f0, 0 0 30px #ff80b3, 0 0 40px #ff3385;
+      }
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin: 10px 20px;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: fall 5s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -10%;
+        opacity: 1;
+      }
+      100% {
+        top: 110%;
+        opacity: 0;
+      }
+    }
+
+    button {
+      background: #ff85a2;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      margin-top: 20px;
+      font-size: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff4f81;
+    }
+
+    .message-box {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      min-height: 50px;
+      color: #d60073;
+    }
+
+    .thai-flair {
+      margin-top: 20px;
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>มุกสิน (Mooksin) 💖</h1>
+  <p id="typewriter"></p>
+  <button onclick="showMessage()">Press me for something special 💗</button>
+  <div class="message-box" id="messageBox"></div>
+  <div class="thai-flair">🌸 🐘 🥥 🇹🇭 🏝️</div>
+
+  <script>
+    // Falling love messages + hearts
+    const loveMessages = [
+      "You're so amazing 😍",
+      "You're the best thing in my life 🌟",
+      "มุกสินคือทุกอย่างของเรา",
+      "You make my world brighter 🌈",
+      "อยู่กับเธอแล้วมีความสุขที่สุด 🥰",
+      "ไม่มีเธอเราอยู่ไม่ได้เลย 💕",
+      "I'm so lucky to have you 🌹",
+      "You're perfect to me 🌙",
+      "เราจะรักเธอตลอดไป 💍",
+      "เธอคือคนพิเศษของเรา ✨"
+    ];
+
+    function createHeartOrMessage() {
+      const el = document.createElement('div');
+      const isMessage = Math.random() < 0.4; // 40% chance it's a message
+      el.style.position = 'absolute';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.top = '-10%';
+      el.style.opacity = 1;
+      el.style.animation = 'fall 5s linear';
+      el.style.pointerEvents = 'none';
+      el.style.zIndex = 1000;
+      el.style.fontFamily = "'Sriracha', cursive";
+      el.style.color = '#ff4f81';
+
+      if (isMessage) {
+        el.textContent = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+        el.style.fontSize = '1.2rem';
+      } else {
+        el.classList.add('heart');
+        el.style.fontSize = '0';
+      }
+
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 5000);
+    }
+
+    setInterval(createHeartOrMessage, 400);
+
+    // Typewriter intro text
+    const text = "You're not a bad girlfriend, Mooksin. You're MY everything. I love you so much.";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+    typeWriter();
+
+    // Button shows a single, constant message
+    function showMessage() {
+      const msgBox = document.getElementById("messageBox");
+      msgBox.innerHTML = "I love you, Mooksin 💖";
+    }
+  </script>
+</body>
+</html>
